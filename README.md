@@ -7,3 +7,5 @@ After deploying, add this environment variable:
 OPENAI_API_KEY
 
 Then redeploy the project.
+
+First deployment trigger
