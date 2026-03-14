@@ -24,7 +24,7 @@ button.onclick = async () => {
     const data = await response.json();
 
     output.textContent =
-      "STATUS: " + response.status + "\\n\\n" +
+      "STATUS: " + response.status + "\n\n" +
       JSON.stringify(data, null, 2);
 
   } catch (error) {
