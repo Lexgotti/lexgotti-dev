@@ -23,14 +23,11 @@ button.onclick = async () => {
 
     const data = await response.json();
 
-    console.log("API RESPONSE:", data);
-
     if (data.result) {
       output.textContent = data.result;
     } else {
       output.textContent = JSON.stringify(data, null, 2);
     }
-
   } catch (error) {
     output.textContent = "Error: " + error.message;
   }
