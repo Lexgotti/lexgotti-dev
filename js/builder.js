@@ -23,15 +23,11 @@ button.onclick = async () => {
 
     const data = await response.json();
 
-    if (!response.ok) {
-      output.textContent = `Error: ${data.error || "Unknown error"}${
-        data.details ? "\\n\\n" + JSON.stringify(data.details, null, 2) : ""
-      }`;
-      return;
-    }
+    output.textContent =
+      "STATUS: " + response.status + "\\n\\n" +
+      JSON.stringify(data, null, 2);
 
-    output.textContent = data.result || "No result returned.";
   } catch (error) {
-    output.textContent = "Error: " + error.message;
+    output.textContent = "FETCH ERROR: " + error.message;
   }
 };
