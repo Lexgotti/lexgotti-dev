@@ -6,7 +6,8 @@ export default async function handler(req, res) {
   }
 
   const key = process.env.OPENAI_API_KEY;
-  const prompt = req.body?.prompt;
+  const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+  const prompt = body?.prompt;
 
   if (!key) {
     return res.status(500).json({
