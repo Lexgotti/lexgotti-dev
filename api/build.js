@@ -24,12 +24,9 @@ export default async function handler(req, res) {
       data.output?.[0]?.content?.[0]?.text ||
       "AI returned no text.";
 
-    res.status(200).json({
-      result: text
-    });
-
+    return res.status(200).json({ result: text });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: error.message
     });
   }
