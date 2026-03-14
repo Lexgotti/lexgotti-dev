@@ -23,9 +23,7 @@ button.onclick = async () => {
 
     const data = await response.json();
 
-    output.textContent =
-      "STATUS: " + response.status + "\n\n" +
-      JSON.stringify(data, null, 2);
+    output.textContent = data.result || "No result returned.";
 
   } catch (error) {
     output.textContent = "FETCH ERROR: " + error.message;
