@@ -1,42 +1,36 @@
-export default async function handler(req,res){
+export default async function handler(req, res) {
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-if(req.method !== "POST"){
-return res.status(405).json({error:"Method not allowed"})
-}
+  if (!OPENAI_API_KEY) {
+    return res.status(500).json({ error: "Missing OpenAI key" });
+  }
 
-const {prompt} = req.body;
+  try {
+    const response = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-4.1-mini",
+        input: `Create a website blueprint for: ${req.body.prompt}`
+      })
+    });
 
-if(!prompt){
-return res.status(400).json({error:"Prompt required"})
-}
+    const data = await response.json();
 
-try{
+    const text =
+      data.output?.[0]?.content?.[0]?.text ||
+      "AI returned no text.";
 
-const response = await fetch("https://api.openai.com/v1/chat/completions",{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"Authorization":`Bearer ${process.env.OPENAI_API_KEY}`
-},
-body:JSON.stringify({
-model:"gpt-4o-mini",
-messages:[
-{role:"system",content:"You generate structured project blueprints."},
-{role:"user",content:prompt}
-]
-})
-});
+    res.status(200).json({
+      result: text
+    });
 
-const data = await response.json();
-
-const result = data.choices?.[0]?.message?.content || "No result";
-
-res.status(200).json({result});
-
-}catch(err){
-
-res.status(500).json({error:"Server error"})
-
-}
-
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
 }
