@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lexgotti.dev — Private Builder Console</title>
+  <title>Lexgotti.dev — Private Builder Console V4</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -11,66 +11,126 @@
   <div class="bg-orb orb-2"></div>
 
   <header class="site-header">
-    <div class="brand">LEXGOTTI<span>.DEV</span></div>
+    <div class="brand">LEXI<span> COMMAND</span></div>
     <nav class="site-nav">
-      <a href="#vision">Vision</a>
-      <a href="#system">System</a>
-      <a href="admin.html" class="nav-btn">Enter Console</a>
+      <a href="#console">Console</a>
+      <a href="#vault">Vault</a>
+      <button id="logoutBtn" class="nav-btn subtle" type="button">Lock</button>
     </nav>
   </header>
 
   <main class="container">
-    <section class="hero card">
-      <p class="eyebrow">PRIVATE BUILDER ENGINE</p>
-      <h1>Lexi Command — your internal company-building console.</h1>
-      <p class="lead">
-        This is the private operator layer behind Lexgotti.dev.
-        Blueprint ideas. Generate website files. Save projects. Build faster.
+    <section id="authGate" class="card auth-card">
+      <p class="eyebrow">PRIVATE ACCESS</p>
+      <h1>Enter the private builder console</h1>
+      <p class="lead small">
+        This is the internal Lexi operator system. Use the access code to unlock the console.
       </p>
+      <label for="accessCode">Access Code</label>
+      <input id="accessCode" type="password" placeholder="Enter your private access code" />
       <div class="button-row">
-        <a class="btn primary" href="admin.html">Open Private Console</a>
-        <a class="btn secondary" href="#system">View System</a>
+        <button id="unlockBtn" class="btn primary" type="button">Unlock Console</button>
       </div>
+      <p class="helper">Default code in this starter: <strong>lexgotti-v4</strong>. Change it in <code>js/config.js</code>.</p>
     </section>
 
-    <section id="vision" class="grid-two">
-      <article class="card feature">
-        <h2>What it is</h2>
-        <p>
-          A private Jarvis-style workspace for Lex. Not a public toy.
-          A command center for blueprints, code generation, launch planning, and project storage.
-        </p>
-      </article>
-      <article class="card feature">
-        <h2>What it becomes</h2>
-        <p>
-          Prompt → Blueprint → Code → Save → Export → Deploy.
-          This version focuses on the internal build loop first.
-        </p>
-      </article>
-    </section>
+    <section id="consoleApp" class="hidden">
+      <section class="dashboard-head card">
+        <div>
+          <p class="eyebrow">PRIVATE BUILDER CONSOLE V4</p>
+          <h1>Build full projects in one command.</h1>
+          <p class="lead small">Prompt → Blueprint → Code → Save → Export</p>
+        </div>
+        <div class="quick-actions">
+          <button id="newProjectBtn" class="btn secondary" type="button">New Project</button>
+          <button id="buildFullProjectBtn" class="btn primary" type="button">⚡ Build Full Project</button>
+          <button id="saveProjectBtn" class="btn secondary" type="button">Save Project</button>
+          <button id="exportProjectBtn" class="btn secondary" type="button">Export Project JSON</button>
+          <button id="prepareDeployBtn" class="btn secondary" type="button">Prepare Deploy</button>
+        </div>
+      </section>
 
-    <section id="system" class="card">
-      <h2>V3 Private Console Modules</h2>
-      <div class="module-grid">
-        <div class="module-box">
-          <h3>Blueprint Engine</h3>
-          <p>Prompt to structured build plan.</p>
+      <section class="stats-grid">
+        <div class="card stat-card">
+          <span class="stat-label">Saved Projects</span>
+          <strong id="savedCount">0</strong>
         </div>
-        <div class="module-box">
-          <h3>Code Engine</h3>
-          <p>Blueprint to real website files.</p>
+        <div class="card stat-card">
+          <span class="stat-label">Last Project</span>
+          <strong id="lastProjectName">None</strong>
         </div>
-        <div class="module-box">
-          <h3>Project Vault</h3>
-          <p>Saved prompts, blueprints, files, notes, status.</p>
+        <div class="card stat-card">
+          <span class="stat-label">Current Status</span>
+          <strong id="currentStatusBadge">Draft</strong>
         </div>
-        <div class="module-box">
-          <h3>Deploy Layer</h3>
-          <p>Prepared for future one-click launch workflow.</p>
+      </section>
+
+      <section id="console" class="grid-main">
+        <article class="card">
+          <div class="section-head">
+            <h2>Project Builder</h2>
+          </div>
+
+          <label for="projectName">Project Name</label>
+          <input id="projectName" type="text" placeholder="Batista Construction, Wikidoggie, Lexi AI..." />
+
+          <label for="projectType">Project Type</label>
+          <select id="projectType">
+            <option value="website">Website</option>
+            <option value="landing-page">Landing Page</option>
+            <option value="saas-dashboard">SaaS Dashboard</option>
+            <option value="internal-tool">Internal Tool</option>
+            <option value="brand-site">Brand Site</option>
+            <option value="offer-page">Offer Page</option>
+            <option value="company-blueprint">Company Blueprint</option>
+          </select>
+
+          <label for="projectPrompt">Build Prompt</label>
+          <textarea id="projectPrompt" placeholder="Build me a premium service website with dark luxury styling, strong CTA, testimonials, lead capture, and a polished modern layout."></textarea>
+
+          <div class="button-row">
+            <button id="generateBlueprintBtn" class="btn secondary" type="button">Generate Blueprint</button>
+            <button id="generateCodeBtn" class="btn secondary" type="button" disabled>Generate Code</button>
+          </div>
+        </article>
+
+        <article id="vault" class="card">
+          <div class="section-head">
+            <h2>Project Vault</h2>
+          </div>
+          <div id="projectList" class="project-list muted">No saved projects yet.</div>
+        </article>
+      </section>
+
+      <section class="grid-main">
+        <article class="card">
+          <div class="section-head">
+            <h2>Blueprint</h2>
+          </div>
+          <div id="blueprintView" class="output-box muted">Blueprint will appear here...</div>
+        </article>
+
+        <article class="card">
+          <div class="section-head">
+            <h2>Generated Files</h2>
+          </div>
+          <div id="fileTabs" class="tabs"></div>
+          <pre id="fileView" class="code-box muted">Generated files will appear here...</pre>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Status</h2>
         </div>
-      </div>
+        <pre id="statusView" class="code-box muted short">Waiting for input...</pre>
+      </section>
     </section>
   </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/vault.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -2,17 +2,24 @@ window.lexgottiState = {
   blueprint: null,
   files: {},
   activeFile: null,
-  currentProjectId: null
+  currentProjectId: null,
+  currentStatus: "Draft"
 };
 
 const blueprintView = document.getElementById("blueprintView");
 const fileTabs = document.getElementById("fileTabs");
 const fileView = document.getElementById("fileView");
 const statusView = document.getElementById("statusView");
+const currentStatusBadge = document.getElementById("currentStatusBadge");
 
 window.setStatus = function setStatus(message, details = "") {
   statusView.classList.remove("muted");
   statusView.textContent = details ? `${message}\n\n${details}` : message;
+};
+
+window.setProjectStatus = function setProjectStatus(value) {
+  window.lexgottiState.currentStatus = value;
+  currentStatusBadge.textContent = value;
 };
 
 window.renderBlueprint = function renderBlueprint(blueprint) {
@@ -77,6 +84,5 @@ window.updateActiveFile = function updateActiveFile() {
   tabs.forEach((tab) => {
     tab.classList.toggle("active", tab.textContent === window.lexgottiState.activeFile);
   });
-
   fileView.textContent = window.lexgottiState.files[window.lexgottiState.activeFile] || "No file selected.";
 };

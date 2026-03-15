@@ -50,29 +50,20 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      return res.status(response.status).json({
-        error: "OpenAI request failed",
-        details: data
-      });
+      return res.status(response.status).json({ error: "OpenAI request failed", details: data });
     }
 
     const text = data.output_text || data.output?.[0]?.content?.[0]?.text;
 
     if (!text) {
-      return res.status(500).json({
-        error: "AI returned no blueprint text.",
-        details: data
-      });
+      return res.status(500).json({ error: "AI returned no blueprint text.", details: data });
     }
 
     let blueprint;
     try {
       blueprint = JSON.parse(text);
     } catch {
-      return res.status(500).json({
-        error: "Blueprint was not valid JSON.",
-        details: text
-      });
+      return res.status(500).json({ error: "Blueprint was not valid JSON.", details: text });
     }
 
     return res.status(200).json({ blueprint });

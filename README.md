@@ -1,21 +1,20 @@
-# Lexgotti.dev v3 Private Console
+# Lexgotti.dev V4 — Build Full Project Mode
 
-Private builder console starter for Lex.
+This version adds the master operator action:
 
-## Pages
-- index.html -> public shell
-- admin.html -> private console
+## Main feature
+- ⚡ Build Full Project
 
-## JS
+## Flow
+Prompt -> Blueprint -> Code -> Save to Vault
+
+## Private access
+Default access code:
+lexgotti-v4
+
+Change it in:
 - js/config.js
-- js/ui.js
-- js/vault.js
-- js/admin.js
 
-## API
+## API routes
 - /api/build
 - /api/generate
-
-## Notes
-Current private access is a lightweight front-end gate only.
-Replace it with real auth later.

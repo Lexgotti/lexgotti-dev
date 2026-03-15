@@ -14,13 +14,11 @@ window.projectVault = {
   save(project) {
     const projects = this.read();
     const idx = projects.findIndex((item) => item.id === project.id);
-
     if (idx >= 0) {
       projects[idx] = project;
     } else {
       projects.unshift(project);
     }
-
     this.write(projects);
     return projects;
   },
