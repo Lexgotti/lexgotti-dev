@@ -1,1 +1,1 @@
-Future saved projects will go here.
+This folder is reserved for future generated project workspaces.

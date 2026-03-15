@@ -1,5 +1,13 @@
 {
-"name":"lexgotti-dev",
-"version":"1.0.0",
-"private":true
+  "name": "lexgotti-dev-v2",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Lexgotti.dev V2 AI builder starter",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "devDependencies": {
+    "vercel": "^39.1.0"
+  }
 }
