@@ -3,163 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lexgotti.dev V2 — AI Builder Portal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Lexgotti.dev — Private Builder Console</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="bg-glow glow-1"></div>
-  <div class="bg-glow glow-2"></div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
 
   <header class="site-header">
     <div class="brand">LEXGOTTI<span>.DEV</span></div>
-    <nav class="nav">
-      <a href="#features">Features</a>
-      <a href="#workspace">Workspace</a>
+    <nav class="site-nav">
+      <a href="#vision">Vision</a>
       <a href="#system">System</a>
-      <a href="#next" class="nav-btn">Build</a>
+      <a href="admin.html" class="nav-btn">Enter Console</a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">AI BUILDER PORTAL</p>
-        <h1>From prompt to product.</h1>
-        <p class="hero-text">
-          Lexgotti.dev is the build side of your ecosystem — a premium workspace where users can
-          describe what they want and get a structured project blueprint back.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#workspace" class="btn btn-primary">Open Builder</a>
-          <a href="#system" class="btn btn-secondary">View Architecture</a>
-        </div>
-
-        <div class="hero-stats">
-          <div><strong>Builder Engine</strong><span>Prompt → blueprint</span></div>
-          <div><strong>Project Types</strong><span>Websites, apps, SaaS, tools</span></div>
-          <div><strong>Empire Mode</strong><span>Public builder + private admin later</span></div>
-        </div>
-      </div>
-
-      <div class="hero-panel">
-        <div class="panel-window">
-          <div class="panel-bar">
-            <span></span><span></span><span></span>
-          </div>
-
-          <div class="panel-body">
-            <div class="prompt-card">
-              <label for="projectType">Project Type</label>
-              <select id="projectType">
-                <option value="website">Website</option>
-                <option value="app">App</option>
-                <option value="saas">SaaS</option>
-                <option value="tool">Internal Tool</option>
-                <option value="game">Game Prototype</option>
-              </select>
-
-              <label for="builderPrompt">Describe what you want to build</label>
-              <textarea id="builderPrompt" placeholder="Example: Build me a premium landing page for a luxury dog walking brand with pricing, booking form, testimonials, and a black-gold style."></textarea>
-
-              <button id="generateBtn" class="btn btn-primary full">Generate Blueprint</button>
-            </div>
-
-            <div class="output-card">
-              <div class="output-title">Builder Response</div>
-              <pre id="outputBox">Your generated blueprint will appear here...</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="features" class="section">
-      <div class="section-head">
-        <p class="eyebrow">CORE FEATURES</p>
-        <h2>What this V2 starter includes</h2>
-      </div>
-
-      <div class="grid cards-3">
-        <article class="card">
-          <h3>AI Blueprint Request</h3>
-          <p>The builder sends user prompts to an API route instead of only simulating the response in the browser.</p>
-        </article>
-        <article class="card">
-          <h3>Project Type Selector</h3>
-          <p>Users can frame the request as a website, app, SaaS, tool, or game prototype for better structure.</p>
-        </article>
-        <article class="card">
-          <h3>Deployment-Ready Foundation</h3>
-          <p>You get the front-end files plus an API example and environment template for the next step.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="workspace" class="section section-alt">
-      <div class="section-head">
-        <p class="eyebrow">WORKSPACE</p>
-        <h2>How the builder flow works</h2>
-      </div>
-
-      <div class="workflow">
-        <div class="step">
-          <span>01</span>
-          <h3>Prompt</h3>
-          <p>User describes the product idea and chooses the type of project.</p>
-        </div>
-        <div class="step">
-          <span>02</span>
-          <h3>AI Route</h3>
-          <p>The front end sends the request to the builder API which generates the structured plan.</p>
-        </div>
-        <div class="step">
-          <span>03</span>
-          <h3>Blueprint</h3>
-          <p>The user receives a usable build plan that can later become real code generation.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="system" class="section">
-      <div class="section-head">
-        <p class="eyebrow">ARCHITECTURE</p>
-        <h2>Platform structure</h2>
-      </div>
-
-      <div class="grid cards-2">
-        <article class="card">
-          <h3>Public Side</h3>
-          <p><code>/</code> marketing + builder portal</p>
-          <p><code>/api/build</code> AI blueprint route</p>
-          <p><code>/projects</code> future generated workspaces</p>
-        </article>
-        <article class="card">
-          <h3>Private Side (next stage)</h3>
-          <p><code>/admin</code> Lexi internal control center</p>
-          <p><code>/admin/projects</code> manage outputs</p>
-          <p><code>/admin/users</code> manage accounts and usage</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="next" class="section cta">
-      <h2>V2 is the bridge from static page to real product.</h2>
-      <p>
-        Upload the front end anywhere you want. For the AI route to work, run the API on a Node/serverless host
-        with your environment key added.
+  <main class="container">
+    <section class="hero card">
+      <p class="eyebrow">PRIVATE BUILDER ENGINE</p>
+      <h1>Lexi Command — your internal company-building console.</h1>
+      <p class="lead">
+        This is the private operator layer behind Lexgotti.dev.
+        Blueprint ideas. Generate website files. Save projects. Build faster.
       </p>
-      <a href="#workspace" class="btn btn-primary">Build the Next Layer</a>
+      <div class="button-row">
+        <a class="btn primary" href="admin.html">Open Private Console</a>
+        <a class="btn secondary" href="#system">View System</a>
+      </div>
+    </section>
+
+    <section id="vision" class="grid-two">
+      <article class="card feature">
+        <h2>What it is</h2>
+        <p>
+          A private Jarvis-style workspace for Lex. Not a public toy.
+          A command center for blueprints, code generation, launch planning, and project storage.
+        </p>
+      </article>
+      <article class="card feature">
+        <h2>What it becomes</h2>
+        <p>
+          Prompt → Blueprint → Code → Save → Export → Deploy.
+          This version focuses on the internal build loop first.
+        </p>
+      </article>
+    </section>
+
+    <section id="system" class="card">
+      <h2>V3 Private Console Modules</h2>
+      <div class="module-grid">
+        <div class="module-box">
+          <h3>Blueprint Engine</h3>
+          <p>Prompt to structured build plan.</p>
+        </div>
+        <div class="module-box">
+          <h3>Code Engine</h3>
+          <p>Blueprint to real website files.</p>
+        </div>
+        <div class="module-box">
+          <h3>Project Vault</h3>
+          <p>Saved prompts, blueprints, files, notes, status.</p>
+        </div>
+        <div class="module-box">
+          <h3>Deploy Layer</h3>
+          <p>Prepared for future one-click launch workflow.</p>
+        </div>
+      </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <p>© 2026 Lexgotti.dev — Builder portal foundation V2.</p>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>

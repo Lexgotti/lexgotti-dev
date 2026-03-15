@@ -10,10 +10,10 @@ export default async function handler(req, res) {
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
-    const prompt = body?.prompt;
+    const blueprint = body?.blueprint;
 
-    if (!prompt) {
-      return res.status(400).json({ error: "Prompt is required." });
+    if (!blueprint) {
+      return res.status(400).json({ error: "Blueprint is required." });
     }
 
     const response = await fetch("https://api.openai.com/v1/responses", {
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
             content: [
               {
                 type: "input_text",
-                text: "Return valid JSON only. Create a structured website blueprint. Include projectName, projectType, pages (with name and sections), features, designTheme, and recommendedStack."
+                text: "Return valid JSON only with a single top-level key called files. files must contain index.html, styles.css, and script.js as strings. Build a polished static website from the provided blueprint."
               }
             ]
           },
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
             content: [
               {
                 type: "input_text",
-                text: prompt
+                text: JSON.stringify(blueprint)
               }
             ]
           }
@@ -60,22 +60,22 @@ export default async function handler(req, res) {
 
     if (!text) {
       return res.status(500).json({
-        error: "AI returned no blueprint text.",
+        error: "AI returned no code text.",
         details: data
       });
     }
 
-    let blueprint;
+    let parsed;
     try {
-      blueprint = JSON.parse(text);
+      parsed = JSON.parse(text);
     } catch {
       return res.status(500).json({
-        error: "Blueprint was not valid JSON.",
+        error: "Generated code was not valid JSON.",
         details: text
       });
     }
 
-    return res.status(200).json({ blueprint });
+    return res.status(200).json({ files: parsed.files || {} });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
